@@ -10,10 +10,17 @@ import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { PhotosGridComponent } from './photos-grid/photos-grid.component';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './app.effects';
+import { PhotosEffects } from './effects/photos.effects';
+import { FlickrPhotoComponent } from './flickr-photo/flickr-photo.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PhotosGridComponent,
+    FlickrPhotoComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +29,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     BrowserAnimationsModule,
     HttpClientModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    EffectsModule.forRoot([AppEffects, PhotosEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

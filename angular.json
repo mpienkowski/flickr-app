@@ -9,7 +9,7 @@
       "projectType": "application",
       "prefix": "app",
       "schematics": {
-        "@schematics/angular:component": {
+        "@ngrx/schematics:component": {
           "styleext": "sass"
         }
       },
@@ -140,5 +140,8 @@
       }
     }
   },
-  "defaultProject": "flickr-app"
+  "defaultProject": "flickr-app",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

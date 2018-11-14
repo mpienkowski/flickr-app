@@ -1,0 +1,5 @@
+<ul>
+  <li *ngFor="let photo of photos | async">
+    <app-flickr-photo [photo]="photo"></app-flickr-photo>
+  </li>
+</ul>
