@@ -1,1 +1,7 @@
-<img src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}.jpg">
+<mat-card>
+  <img mat-card-image src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}.jpg">
+  <mat-card-content>
+    <div class="caption">{{photo.datetaken | justDate}}, {{photo.ownername}}</div>
+    <div class="title">{{photo.title}}</div>
+  </mat-card-content>
+</mat-card>

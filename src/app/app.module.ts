@@ -16,14 +16,16 @@ import { AppEffects } from './app.effects';
 import { PhotosEffects } from './effects/photos.effects';
 import { FlickrPhotoComponent } from './flickr-photo/flickr-photo.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { MatProgressSpinnerModule, MatSnackBarModule } from '@angular/material';
+import { MatCardModule, MatProgressSpinnerModule, MatSnackBarModule } from '@angular/material';
 import { MessageEffects } from './effects/message.effects';
+import { JustDatePipe } from './just-date.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     PhotosGridComponent,
-    FlickrPhotoComponent
+    FlickrPhotoComponent,
+    JustDatePipe
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,8 @@ import { MessageEffects } from './effects/message.effects';
     EffectsModule.forRoot([AppEffects, PhotosEffects, MessageEffects]),
     InfiniteScrollModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

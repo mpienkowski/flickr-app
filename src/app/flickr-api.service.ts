@@ -17,7 +17,8 @@ export class FlickrApiService {
     const url = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=f04007aaa6ac8cbbd574ec1339296cbc&tags=dog&format=json&nojsoncallback=1`;
     const options = {
       params: {
-        'page': loadedPages.toString()
+        'page': loadedPages.toString(),
+        'extras': 'description,owner_name,date_taken'
       }
     };
     return this.http.get<{ photos: { photo: Photo[] } }>(url, options).pipe(
