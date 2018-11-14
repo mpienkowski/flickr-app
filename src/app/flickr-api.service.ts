@@ -12,10 +12,15 @@ export class FlickrApiService {
   constructor(private http: HttpClient) {
   }
 
-  public searchPhotos(): Observable<Photo[]> {
+  public searchPhotos(loadedPages: number): Observable<Photo[]> {
     // tslint:disable-next-line
     const url = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=f04007aaa6ac8cbbd574ec1339296cbc&tags=dog&format=json&nojsoncallback=1`;
-    return this.http.get<{photos: {photo: Photo[]}}>(url).pipe(
+    const options = {
+      params: {
+        'page': loadedPages.toString()
+      }
+    };
+    return this.http.get<{ photos: { photo: Photo[] } }>(url, options).pipe(
       map(response => response.photos.photo)
     );
   }

@@ -15,6 +15,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects';
 import { PhotosEffects } from './effects/photos.effects';
 import { FlickrPhotoComponent } from './flickr-photo/flickr-photo.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { MatProgressSpinnerModule, MatSnackBarModule } from '@angular/material';
+import { MessageEffects } from './effects/message.effects';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import { FlickrPhotoComponent } from './flickr-photo/flickr-photo.component';
     BrowserAnimationsModule,
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
-    EffectsModule.forRoot([AppEffects, PhotosEffects])
+    EffectsModule.forRoot([AppEffects, PhotosEffects, MessageEffects]),
+    InfiniteScrollModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

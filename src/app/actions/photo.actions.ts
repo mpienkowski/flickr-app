@@ -14,6 +14,7 @@ export enum PhotoActionTypes {
   DeletePhotos = '[Photo] Delete Photos',
   ClearPhotos = '[Photo] Clear Photos',
   FetchNextPageOfPhotos = '[Photo] Fetch Next Page of Photos',
+  FetchFailed = '[Photo] Fetch Failed',
 }
 
 export class LoadPhotos implements Action {
@@ -78,6 +79,10 @@ export class FetchNextPageOfPhotos implements Action {
   readonly type = PhotoActionTypes.FetchNextPageOfPhotos;
 }
 
+export class FetchFailed implements Action {
+  readonly type = PhotoActionTypes.FetchFailed;
+}
+
 export type PhotoActions =
  LoadPhotos
  | AddPhoto
@@ -89,4 +94,5 @@ export type PhotoActions =
  | DeletePhoto
  | DeletePhotos
  | ClearPhotos
- | FetchNextPageOfPhotos;
+ | FetchNextPageOfPhotos
+ | FetchFailed;

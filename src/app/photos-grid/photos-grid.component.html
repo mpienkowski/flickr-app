@@ -1,5 +1,12 @@
-<ul class="grid">
-  <li *ngFor="let photo of photos | async">
-    <app-flickr-photo [photo]="photo"></app-flickr-photo>
-  </li>
-</ul>
+<div infiniteScroll
+     [infiniteScrollDistance]="2"
+     [infiniteScrollThrottle]="50"
+     (scrolled)="onScroll()">
+  <ul class="grid">
+    <li *ngFor="let photo of photos | async">
+      <app-flickr-photo [photo]="photo"></app-flickr-photo>
+    </li>
+  </ul>
+
+  <mat-spinner *ngIf="isLoading | async"></mat-spinner>
+</div>
