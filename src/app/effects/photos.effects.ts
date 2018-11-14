@@ -20,7 +20,7 @@ export class PhotosEffects {
     ofType(PhotoActionTypes.FetchNextPageOfPhotos),
     withLatestFrom(this.store.pipe(select(selectLoadedPages))),
     withLatestFrom(this.store.pipe(select(selectFilter))),
-    mergeMap(([[, loadedPages], filter]) =>
+    switchMap(([[, loadedPages], filter]) =>
       this.flickrApiService.searchPhotos(loadedPages + 1, filter).pipe(
         map(photos => new AddPhotos({photos})),
         catchError(() => of(new FetchFailed()))
@@ -30,7 +30,7 @@ export class PhotosEffects {
 
   @Effect()
   public filterChanges$: Observable<Action> = this.actions$.pipe(
-    ofType(FilterActionTypes.SetText),
+    ofType(FilterActionTypes.SetText, FilterActionTypes.SetLicenses),
     switchMap(() => [
       new ClearPhotos(),
       new FetchNextPageOfPhotos()

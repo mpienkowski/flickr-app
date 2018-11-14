@@ -16,11 +16,19 @@ import { AppEffects } from './app.effects';
 import { PhotosEffects } from './effects/photos.effects';
 import { FlickrPhotoComponent } from './flickr-photo/flickr-photo.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { MatCardModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule, MatSnackBarModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatProgressSpinnerModule, MatSelectModule,
+  MatSnackBarModule
+} from '@angular/material';
 import { MessageEffects } from './effects/message.effects';
 import { JustDatePipe } from './just-date.pipe';
 import { FilterComponent } from './filter/filter.component';
 import { FormsModule } from '@angular/forms';
+import { LicenseEffects } from './effects/license.effects';
 
 @NgModule({
   declarations: [
@@ -39,13 +47,15 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
-    EffectsModule.forRoot([AppEffects, PhotosEffects, MessageEffects]),
+    EffectsModule.forRoot([AppEffects, PhotosEffects, MessageEffects, LicenseEffects]),
     InfiniteScrollModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
     MatCardModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

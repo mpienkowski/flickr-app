@@ -1,7 +1,8 @@
 import { Action } from '@ngrx/store';
 
 export enum FilterActionTypes {
-  SetText = '[Filter] Set Text'
+  SetText = '[Filter] Set Text',
+  SetLicenses = '[Filter] Set Licence'
 }
 
 export class SetText implements Action {
@@ -11,4 +12,13 @@ export class SetText implements Action {
   }
 }
 
-export type FilterActions = SetText;
+export class SetLicenses implements Action {
+  readonly type = FilterActionTypes.SetLicenses;
+
+  constructor(public payload: string[]) {
+  }
+}
+
+
+export type FilterActions = SetText
+  | SetLicenses;

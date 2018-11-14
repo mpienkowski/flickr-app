@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Photo } from '../models/photo.model';
+import { RootState } from '../reducers';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-flickr-photo',
@@ -9,10 +11,9 @@ import { Photo } from '../models/photo.model';
 export class FlickrPhotoComponent implements OnInit {
   @Input() photo: Photo;
 
-  constructor() {
+  constructor(private store: Store<RootState>) {
   }
 
   ngOnInit() {
   }
-
 }
