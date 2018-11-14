@@ -5,7 +5,7 @@ import { ErrorMessage, MessageActionTypes } from '../actions/message.actions';
 import { Action, Store } from '@ngrx/store';
 import { MatSnackBar } from '@angular/material';
 import { tap } from 'rxjs/operators';
-import { State } from '../reducers';
+import { RootState } from '../reducers';
 
 
 @Injectable()
@@ -24,6 +24,6 @@ export class MessageEffects {
 
   constructor(private actions$: Actions,
               private snackBar: MatSnackBar,
-              private store: Store<State>) {
+              private store: Store<RootState>) {
   }
 }

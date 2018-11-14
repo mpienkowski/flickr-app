@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { State } from '../reducers';
+import { RootState } from '../reducers';
 import { ClearPhotos, FetchNextPageOfPhotos } from '../actions/photo.actions';
 import { Photo } from '../models/photo.model';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { selectAllPhotos, selectIsLoading } from '../selectors/photo.selectors';
 
 @Component({
@@ -15,10 +15,10 @@ export class PhotosGridComponent implements OnInit {
   public photos: Observable<Photo[]>;
   public isLoading: Observable<boolean>;
 
-  constructor(private store: Store<State>) {
+  constructor(private store: Store<RootState>) {
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.store.dispatch(new ClearPhotos());
     this.store.dispatch(new FetchNextPageOfPhotos());
 
@@ -27,7 +27,6 @@ export class PhotosGridComponent implements OnInit {
   }
 
   public onScroll() {
-    console.log('on scroll');
     this.store.dispatch(new FetchNextPageOfPhotos());
   }
 }

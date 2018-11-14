@@ -16,16 +16,19 @@ import { AppEffects } from './app.effects';
 import { PhotosEffects } from './effects/photos.effects';
 import { FlickrPhotoComponent } from './flickr-photo/flickr-photo.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { MatCardModule, MatProgressSpinnerModule, MatSnackBarModule } from '@angular/material';
+import { MatCardModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule, MatSnackBarModule } from '@angular/material';
 import { MessageEffects } from './effects/message.effects';
 import { JustDatePipe } from './just-date.pipe';
+import { FilterComponent } from './filter/filter.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     PhotosGridComponent,
     FlickrPhotoComponent,
-    JustDatePipe
+    JustDatePipe,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
@@ -34,12 +37,15 @@ import { JustDatePipe } from './just-date.pipe';
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     BrowserAnimationsModule,
     HttpClientModule,
+    FormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     EffectsModule.forRoot([AppEffects, PhotosEffects, MessageEffects]),
     InfiniteScrollModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
-    MatCardModule
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
