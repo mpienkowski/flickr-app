@@ -1,22 +1,23 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Photo } from './models/photo.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { State } from './reducers/filter.reducer';
 import { License } from './models/license.model';
+import { AppConfig } from './models/appConfig.model';
+import { APP_CONFIG } from './config/app.config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FlickrApiService {
-
-  constructor(private http: HttpClient) {
+  constructor(@Inject(APP_CONFIG) private appConfig: AppConfig,
+              private http: HttpClient) {
   }
 
   public searchPhotos(loadedPages: number, filter: State): Observable<Photo[]> {
-    // tslint:disable-next-line
-    const url = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=f04007aaa6ac8cbbd574ec1339296cbc&format=json&nojsoncallback=1`;
+    const url = this.getUrl('flickr.photos.search');
     const options = {
       params: {
         'page': loadedPages.toString(),
@@ -31,10 +32,13 @@ export class FlickrApiService {
   }
 
   public fetchLicenses(): Observable<License[]> {
-    // tslint:disable-next-line
-    const url = `https://api.flickr.com/services/rest/?method=flickr.photos.licenses.getInfo&api_key=8b8b146fa566322f8b61c4cd9a1c0a6d&format=json&nojsoncallback=1`;
+    const url = this.getUrl('flickr.photos.licenses.getInfo');
     return this.http.get<{ licenses: { license: License[] } }>(url).pipe(
       map(response => response.licenses.license)
     );
+  }
+
+  private getUrl(method: string) {
+    return `https://api.flickr.com/services/rest/?method=${method}&api_key=${this.appConfig.flickrApiKey}&format=json&nojsoncallback=1`;
   }
 }

@@ -40,7 +40,7 @@ export class PhotosEffects {
   @Effect()
   public handleErrors$: Observable<Action> = this.actions$.pipe(
     ofType(PhotoActionTypes.FetchFailed),
-    map(() => new ErrorMessage('Fetching error, please try again', new FetchNextPageOfPhotos()))
+    map(() => new ErrorMessage(`Couldn't fetch photos, please try again`, new FetchNextPageOfPhotos()))
   );
 
   constructor(private actions$: Actions,

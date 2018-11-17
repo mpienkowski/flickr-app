@@ -21,7 +21,8 @@ import {
   MatCardModule,
   MatFormFieldModule,
   MatInputModule,
-  MatProgressSpinnerModule, MatSelectModule,
+  MatProgressSpinnerModule,
+  MatSelectModule,
   MatSnackBarModule
 } from '@angular/material';
 import { MessageEffects } from './effects/message.effects';
@@ -29,6 +30,7 @@ import { JustDatePipe } from './just-date.pipe';
 import { FilterComponent } from './filter/filter.component';
 import { FormsModule } from '@angular/forms';
 import { LicenseEffects } from './effects/license.effects';
+import { APP_CONFIG, appConfig } from './config/app.config';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { LicenseEffects } from './effects/license.effects';
     MatButtonModule,
     MatSelectModule
   ],
-  providers: [],
+  providers: [
+    {provide: APP_CONFIG, useValue: appConfig}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

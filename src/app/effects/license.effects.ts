@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import { FetchFailed, FetchNextPageOfPhotos, PhotoActionTypes } from '../actions/photo.actions';
+import { FetchFailed } from '../actions/license.actions';
 import { Observable, of } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { AddLicenses, FetchLicenses, LicenseActionTypes } from '../actions/license.actions';
@@ -25,7 +25,7 @@ export class LicenseEffects {
   @Effect()
   public handleErrors$: Observable<Action> = this.actions$.pipe(
     ofType(LicenseActionTypes.FetchFailed),
-    map(() => new ErrorMessage('Fetching error, please try again', new FetchLicenses()))
+    map(() => new ErrorMessage(`Couldn't fetch licenses, please try again`, new FetchLicenses()))
   );
 
   constructor(private actions$: Actions,
