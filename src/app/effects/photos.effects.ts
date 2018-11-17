@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
-import { catchError, map, mergeMap, switchMap, withLatestFrom } from 'rxjs/operators';
+import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { Action, select, Store } from '@ngrx/store';
 import { AddPhotos, ClearPhotos, FetchFailed, FetchNextPageOfPhotos, PhotoActionTypes } from '../actions/photo.actions';
 import { FlickrApiService } from '../flickr-api.service';

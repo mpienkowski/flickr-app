@@ -4,7 +4,6 @@
   </mat-form-field>
   <mat-form-field>
     <mat-select placeholder="License" [(value)]="filter.licenses" (selectionChange)="onLicensesChange()" multiple>
-      <mat-option>None</mat-option>
       <mat-option *ngFor="let license of licenses | async" [value]="license.id">
         {{license.name}}
       </mat-option>

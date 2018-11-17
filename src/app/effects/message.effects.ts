@@ -17,7 +17,7 @@ export class MessageEffects {
     tap((action: ErrorMessage) => {
       const snackBar = this.snackBar.open(action.message, action.actionToRetry ? 'Retry' : null);
       if (action.actionToRetry) {
-        snackBar.afterDismissed().toPromise().then(() => this.store.dispatch(action.actionToRetry));
+        snackBar.onAction().subscribe(() => this.store.dispatch(action.actionToRetry));
       }
     })
   );
