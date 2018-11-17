@@ -1,10 +1,12 @@
 import { Action } from '@ngrx/store';
+import { LatLngBounds } from '@agm/core';
 
 export enum FilterActionTypes {
   SetText = '[Filter] Set Text',
   SetLicenses = '[Filter] Set Licence',
   SetMinDate = '[Filter] Set Min Date',
   SetMaxDate = '[Filter] Set Max Date',
+  SetBbox = '[Filter] Set Bbox'
 }
 
 export class SetText implements Action {
@@ -35,7 +37,15 @@ export class SetMaxDate implements Action {
   }
 }
 
+export class SetBbox implements Action {
+  readonly type = FilterActionTypes.SetBbox;
+
+  constructor(public payload: LatLngBounds) {
+  }
+}
+
 export type FilterActions = SetText
   | SetLicenses
   | SetMinDate
-  | SetMaxDate;
+  | SetMaxDate
+  | SetBbox;

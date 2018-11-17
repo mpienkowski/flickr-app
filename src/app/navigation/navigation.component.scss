@@ -1,0 +1,11 @@
+@import "../../variables";
+
+a {
+  color: $primary;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.active {
+  color: $accent;
+}

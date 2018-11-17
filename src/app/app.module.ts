@@ -34,6 +34,12 @@ import { FilterComponent } from './filter/filter.component';
 import { FormsModule } from '@angular/forms';
 import { LicenseEffects } from './effects/license.effects';
 import { APP_CONFIG, appConfig } from './config/app.config';
+import { PhotoSearchComponent } from './photo-search/photo-search.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { PhotoMapComponent } from './photo-map/photo-map.component';
+import { AgmCoreModule } from '@agm/core';
+import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
+import { MapPhotosEffects } from './effects/map-photos.effects';
 
 @NgModule({
   declarations: [
@@ -41,7 +47,10 @@ import { APP_CONFIG, appConfig } from './config/app.config';
     PhotosGridComponent,
     FlickrPhotoComponent,
     JustDatePipe,
-    FilterComponent
+    FilterComponent,
+    PhotoSearchComponent,
+    NavigationComponent,
+    PhotoMapComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +61,7 @@ import { APP_CONFIG, appConfig } from './config/app.config';
     HttpClientModule,
     FormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
-    EffectsModule.forRoot([AppEffects, PhotosEffects, MessageEffects, LicenseEffects]),
+    EffectsModule.forRoot([AppEffects, PhotosEffects, MessageEffects, LicenseEffects, MapPhotosEffects]),
     InfiniteScrollModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
@@ -63,7 +72,9 @@ import { APP_CONFIG, appConfig } from './config/app.config';
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatToolbarModule
+    MatToolbarModule,
+    AgmCoreModule.forRoot({apiKey: appConfig.googleMapsApiKey}),
+    AgmSnazzyInfoWindowModule
   ],
   providers: [
     {provide: APP_CONFIG, useValue: appConfig}

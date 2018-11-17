@@ -1,17 +1,20 @@
 import { FilterActions, FilterActionTypes } from '../actions/filter.actions';
+import { LatLngBounds } from '@agm/core';
 
 export interface State {
   text: string;
   licenses: string[];
   minDate: Date;
   maxDate: Date;
+  bbox: LatLngBounds;
 }
 
 export const initialState: State = {
   text: 'dogs',
   licenses: [],
   minDate: null,
-  maxDate: null
+  maxDate: null,
+  bbox: null
 };
 
 export function reducer(state = initialState, action: FilterActions): State {
@@ -28,6 +31,9 @@ export function reducer(state = initialState, action: FilterActions): State {
 
     case FilterActionTypes.SetMaxDate:
       return {...state, maxDate: action.payload};
+
+    case FilterActionTypes.SetBbox:
+      return {...state, bbox: action.payload};
 
     default:
       return state;
