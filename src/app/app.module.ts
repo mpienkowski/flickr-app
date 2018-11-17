@@ -19,11 +19,14 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import {
   MatButtonModule,
   MatCardModule,
+  MatDatepickerModule,
   MatFormFieldModule,
   MatInputModule,
+  MatNativeDateModule,
   MatProgressSpinnerModule,
   MatSelectModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatToolbarModule
 } from '@angular/material';
 import { MessageEffects } from './effects/message.effects';
 import { JustDatePipe } from './just-date.pipe';
@@ -57,7 +60,10 @@ import { APP_CONFIG, appConfig } from './config/app.config';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatToolbarModule
   ],
   providers: [
     {provide: APP_CONFIG, useValue: appConfig}

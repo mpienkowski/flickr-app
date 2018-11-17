@@ -14,6 +14,12 @@ import { selectFilter } from '../selectors/filter.selectors';
 
 @Injectable()
 export class PhotosEffects {
+  private readonly filterChangeActions = [
+    FilterActionTypes.SetText,
+    FilterActionTypes.SetLicenses,
+    FilterActionTypes.SetMinDate,
+    FilterActionTypes.SetMaxDate
+  ];
 
   @Effect()
   public fetchNextPage$: Observable<Action> = this.actions$.pipe(
@@ -27,20 +33,18 @@ export class PhotosEffects {
       )
     )
   );
-
-  @Effect()
-  public filterChanges$: Observable<Action> = this.actions$.pipe(
-    ofType(FilterActionTypes.SetText, FilterActionTypes.SetLicenses),
-    switchMap(() => [
-      new ClearPhotos(),
-      new FetchNextPageOfPhotos()
-    ])
-  );
-
   @Effect()
   public handleErrors$: Observable<Action> = this.actions$.pipe(
     ofType(PhotoActionTypes.FetchFailed),
     map(() => new ErrorMessage(`Couldn't fetch photos, please try again`, new FetchNextPageOfPhotos()))
+  );
+  @Effect()
+  public filterChanges$: Observable<Action> = this.actions$.pipe(
+    ofType(...this.filterChangeActions),
+    switchMap(() => [
+      new ClearPhotos(),
+      new FetchNextPageOfPhotos()
+    ])
   );
 
   constructor(private actions$: Actions,

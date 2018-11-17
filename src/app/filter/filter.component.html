@@ -1,12 +1,25 @@
-<mat-card>
+<mat-toolbar>
   <mat-form-field>
     <input matInput [(ngModel)]="filter.text" (change)="onTextChange()">
   </mat-form-field>
   <mat-form-field>
-    <mat-select placeholder="License" [(value)]="filter.licenses" (selectionChange)="onLicensesChange()" multiple>
+    <mat-select placeholder="License" [(value)]="filter.licenses" (selectionChange)="onLicensesChange($event)"
+                multiple>
       <mat-option *ngFor="let license of licenses | async" [value]="license.id">
         {{license.name}}
       </mat-option>
     </mat-select>
   </mat-form-field>
-</mat-card>
+  <mat-form-field>
+    <input matInput [matDatepicker]="minDatePicker" placeholder="Choose min date"
+           (dateChange)="onMinDateChange($event)">
+    <mat-datepicker-toggle matSuffix [for]="minDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #minDatePicker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [matDatepicker]="maxDatePicker" placeholder="Choose max date"
+           (dateChange)="onMaxDateChange($event)">
+    <mat-datepicker-toggle matSuffix [for]="maxDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #maxDatePicker></mat-datepicker>
+  </mat-form-field>
+</mat-toolbar>

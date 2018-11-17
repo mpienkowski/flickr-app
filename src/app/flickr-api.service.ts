@@ -20,10 +20,12 @@ export class FlickrApiService {
     const url = this.getUrl('flickr.photos.search');
     const options = {
       params: {
-        'page': loadedPages.toString(),
-        'extras': 'description,owner_name,date_taken',
-        'text': filter.text,
-        'license': filter.licenses.join(',')
+        page: loadedPages.toString(),
+        extras: 'description,owner_name,date_taken',
+        text: filter.text,
+        license: filter.licenses.join(','),
+        min_taken_date: this.getTimestamp(filter.minDate),
+        max_taken_date: this.getTimestamp(filter.maxDate)
       }
     };
     return this.http.get<{ photos: { photo: Photo[] } }>(url, options).pipe(
@@ -40,5 +42,9 @@ export class FlickrApiService {
 
   private getUrl(method: string) {
     return `https://api.flickr.com/services/rest/?method=${method}&api_key=${this.appConfig.flickrApiKey}&format=json&nojsoncallback=1`;
+  }
+
+  private getTimestamp(date: Date): string {
+    return date ? (Math.round(date.getTime() / 1000)).toString() : '';
   }
 }

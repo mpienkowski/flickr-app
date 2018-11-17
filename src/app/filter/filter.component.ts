@@ -1,13 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { State } from '../reducers/filter.reducer';
+import { State as Filter } from '../reducers/filter.reducer';
 import { select, Store } from '@ngrx/store';
 import { RootState } from '../reducers';
 import { selectFilter } from '../selectors/filter.selectors';
 import { Observable, Subscription } from 'rxjs';
-import { SetLicenses, SetText } from '../actions/filter.actions';
+import { SetLicenses, SetMaxDate, SetMinDate, SetText } from '../actions/filter.actions';
 import { selectAllLicenses } from '../selectors/licenses.selectors';
 import { License } from '../models/license.model';
 import { FetchLicenses } from '../actions/license.actions';
+import { MatDatepickerInputEvent, MatSelectChange } from '@angular/material';
 
 @Component({
   selector: 'app-filter',
@@ -15,7 +16,7 @@ import { FetchLicenses } from '../actions/license.actions';
   styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent implements OnInit, OnDestroy {
-  public filter: State;
+  public filter: Filter;
   private subscriptions: Subscription = new Subscription();
   private licenses: Observable<License[]>;
 
@@ -40,8 +41,15 @@ export class FilterComponent implements OnInit, OnDestroy {
     this.store.dispatch(new SetText(this.filter.text));
   }
 
-  public onLicensesChange() {
-    console.log(this.filter.licenses);
-    this.store.dispatch(new SetLicenses(this.filter.licenses));
+  public onLicensesChange({value}: MatSelectChange) {
+    this.store.dispatch(new SetLicenses(value));
+  }
+
+  public onMinDateChange({value}: MatDatepickerInputEvent<Date>) {
+    this.store.dispatch(new SetMinDate(value));
+  }
+
+  public onMaxDateChange({value}: MatDatepickerInputEvent<Date>) {
+    this.store.dispatch(new SetMaxDate(value));
   }
 }

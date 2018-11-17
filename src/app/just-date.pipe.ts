@@ -5,7 +5,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class JustDatePipe implements PipeTransform {
   transform(value: string): string {
-    const date = new Date(value);
-    return `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`;
+    return new Date(value).toDateString();
   }
 }
