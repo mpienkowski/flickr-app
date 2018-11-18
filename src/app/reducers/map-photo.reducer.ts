@@ -1,6 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { Photo } from '../models/photo.model';
 import { MapPhotoActions, MapPhotoActionTypes } from '../actions/map-photo.actions';
+import { FilterActions, FilterActionTypes } from '../actions/filter.actions';
 
 export interface State extends EntityState<Photo> {
   isFetching: boolean;
@@ -14,7 +15,7 @@ export const initialState: State = adapter.getInitialState({
 
 export function reducer(
   state = initialState,
-  action: MapPhotoActions
+  action: MapPhotoActions | FilterActions
 ): State {
   switch (action.type) {
     case MapPhotoActionTypes.AddMapPhoto: {
@@ -30,7 +31,7 @@ export function reducer(
     }
 
     case MapPhotoActionTypes.UpsertMapPhotos: {
-      return adapter.upsertMany(action.payload.mapPhotos, state);
+      return {...adapter.upsertMany(action.payload.mapPhotos, state), isFetching: false};
     }
 
     case MapPhotoActionTypes.UpdateMapPhoto: {
@@ -58,6 +59,10 @@ export function reducer(
     }
 
     case MapPhotoActionTypes.FetchMapPhotos: {
+      return {...state, isFetching: true};
+    }
+
+    case FilterActionTypes.SetBbox: {
       return {...state, isFetching: true};
     }
 

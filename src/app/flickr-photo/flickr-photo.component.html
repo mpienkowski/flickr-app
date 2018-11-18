@@ -5,8 +5,9 @@
                     [matTooltipDisabled]="photo.title.length < titleLengthLimit">
       {{photo.title | truncate:titleLengthLimit}}
     </mat-card-title>
-    <mat-card-subtitle>{{photo.datetaken | justDate}}, {{photo.ownername}}</mat-card-subtitle>
+    <mat-card-subtitle>{{photo.ownername}}</mat-card-subtitle>
+    <mat-card-subtitle>{{photo.datetaken | justDate}}</mat-card-subtitle>
   </mat-card-header>
-  <img width="300" height="300" class="flickrPhoto" mat-card-image
-       src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}.jpg">
+    <img width="300" height="300" class="flickrPhoto" mat-card-image
+         src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}.jpg">
 </mat-card>

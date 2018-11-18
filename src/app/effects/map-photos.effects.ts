@@ -5,7 +5,7 @@ import { Action, select, Store } from '@ngrx/store';
 import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { ErrorMessage } from '../actions/message.actions';
-import { FetchFailed, FetchMapPhotos, LoadMapPhotos, MapPhotoActionTypes } from '../actions/map-photo.actions';
+import { FetchFailed, FetchMapPhotos, LoadMapPhotos, MapPhotoActionTypes, UpsertMapPhotos } from '../actions/map-photo.actions';
 import { FlickrApiService } from '../flickr-api.service';
 import { RootState } from '../reducers';
 import { FilterActionTypes } from '../actions/filter.actions';
@@ -14,12 +14,23 @@ import { FilterActionTypes } from '../actions/filter.actions';
 @Injectable()
 export class MapPhotosEffects {
   @Effect()
-  public fetchNextPage$: Observable<Action> = this.actions$.pipe(
+  public loadMapPhotos$: Observable<Action> = this.actions$.pipe(
     ofType(MapPhotoActionTypes.FetchMapPhotos),
     withLatestFrom(this.store.pipe(select(selectFilter))),
     switchMap(([, filter]) =>
       this.flickrApiService.searchPhotos(0, filter).pipe(
         map(photos => new LoadMapPhotos({mapPhotos: photos})),
+        catchError(() => of(new FetchFailed()))
+      )
+    )
+  );
+  @Effect()
+  public upsertMapPhotos$: Observable<Action> = this.actions$.pipe(
+    ofType(FilterActionTypes.SetBbox),
+    withLatestFrom(this.store.pipe(select(selectFilter))),
+    switchMap(([, filter]) =>
+      this.flickrApiService.searchPhotos(0, filter).pipe(
+        map(photos => new UpsertMapPhotos({mapPhotos: photos})),
         catchError(() => of(new FetchFailed()))
       )
     )
@@ -33,8 +44,7 @@ export class MapPhotosEffects {
     FilterActionTypes.SetText,
     FilterActionTypes.SetLicenses,
     FilterActionTypes.SetMinDate,
-    FilterActionTypes.SetMaxDate,
-    FilterActionTypes.SetBbox
+    FilterActionTypes.SetMaxDate
   ];
   @Effect()
   public filterChanges$: Observable<Action> = this.actions$.pipe(
