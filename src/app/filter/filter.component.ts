@@ -9,6 +9,7 @@ import { selectAllLicenses } from '../selectors/licenses.selectors';
 import { License } from '../models/license.model';
 import { FetchLicenses } from '../actions/license.actions';
 import { MatDatepickerInputEvent, MatSelectChange } from '@angular/material';
+import { emptyAuthor } from '../models/author.model';
 
 @Component({
   selector: 'app-filter',
@@ -54,6 +55,6 @@ export class FilterComponent implements OnInit, OnDestroy {
   }
 
   public onAuthorRemove() {
-    this.store.dispatch(new SetAuthor(null));
+    this.store.dispatch(new SetAuthor(emptyAuthor()));
   }
 }

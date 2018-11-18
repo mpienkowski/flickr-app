@@ -1,6 +1,6 @@
 import { FilterActions, FilterActionTypes } from '../actions/filter.actions';
 import { LatLngBounds } from '@agm/core';
-import { Author } from '../models/author.model';
+import { Author, emptyAuthor } from '../models/author.model';
 
 export interface State {
   text: string;
@@ -17,7 +17,7 @@ export const initialState: State = {
   minDate: null,
   maxDate: null,
   bbox: null,
-  author: {name: '', id: ''}
+  author: emptyAuthor()
 };
 
 export function reducer(state = initialState, action: FilterActions): State {
@@ -39,7 +39,7 @@ export function reducer(state = initialState, action: FilterActions): State {
       return {...state, bbox: action.payload};
 
     case FilterActionTypes.SetAuthor:
-      return {...initialState, text: '', author: action.payload};
+      return {...initialState, text: '', bbox: state.bbox, author: action.payload};
 
     default:
       return state;
