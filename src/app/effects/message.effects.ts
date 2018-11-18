@@ -15,7 +15,7 @@ export class MessageEffects {
   public handleErrors$: Observable<Action> = this.actions$.pipe(
     ofType(MessageActionTypes.ErrorMessage),
     tap((action: ErrorMessage) => {
-      const snackBar = this.snackBar.open(action.message, action.actionToRetry ? 'Retry' : null);
+      const snackBar = this.snackBar.open(action.message, action.actionToRetry ? 'Retry' : null, {duration: 10000});
       if (action.actionToRetry) {
         snackBar.onAction().subscribe(() => this.store.dispatch(action.actionToRetry));
       }
