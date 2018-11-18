@@ -16,7 +16,6 @@ export class MapPhotosEffects {
   @Effect()
   public loadMapPhotos$: Observable<Action> = this.actions$.pipe(
     ofType(MapPhotoActionTypes.FetchMapPhotos),
-    debounce(() => interval(250)),
     withLatestFrom(this.store.pipe(select(selectFilter))),
     filter(([, currentFilter]) => !!currentFilter.bbox),
     switchMap(([, currentFilter]) => this.flickrApiService.searchPhotos(0, currentFilter)),
@@ -46,6 +45,7 @@ export class MapPhotosEffects {
   @Effect()
   public filterChanges$: Observable<Action> = this.actions$.pipe(
     ofType(...this.filterChangeActions),
+    debounce(() => interval(250)),
     map(() => new FetchMapPhotos())
   );
 

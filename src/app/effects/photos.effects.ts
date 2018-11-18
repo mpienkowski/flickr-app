@@ -3,7 +3,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { interval, Observable, of } from 'rxjs';
 import { catchError, debounce, filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { Action, select, Store } from '@ngrx/store';
-import { AddPhotos, ClearPhotos, FetchFailed, FetchNextPageOfPhotos, PhotoActionTypes } from '../actions/photo.actions';
+import { AddPhotos, ClearPhotos, FetchFailed, FetchNextPageOfPhotos, LoadPhotos, PhotoActionTypes } from '../actions/photo.actions';
 import { FlickrApiService } from '../flickr-api.service';
 import { RootState } from '../reducers';
 import { selectLoadedPages } from '../selectors/photo.selectors';
@@ -17,7 +17,6 @@ export class PhotosEffects {
   @Effect()
   public fetchNextPage$: Observable<Action> = this.actions$.pipe(
     ofType(PhotoActionTypes.FetchNextPageOfPhotos),
-    debounce(() => interval(250)),
     withLatestFrom(this.store.pipe(select(selectLoadedPages))),
     withLatestFrom(this.store.pipe(select(selectFilter))),
     filter(([[, loadedPages], currentFilter]) => !currentFilter.bbox),
@@ -40,6 +39,7 @@ export class PhotosEffects {
   @Effect()
   public filterChanges$: Observable<Action> = this.actions$.pipe(
     ofType(...this.filterChangeActions),
+    debounce(() => interval(250)),
     switchMap(() => [
       new ClearPhotos(),
       new FetchNextPageOfPhotos()
