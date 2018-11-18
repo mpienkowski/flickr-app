@@ -3,13 +3,14 @@
      [infiniteScrollDistance]="2"
      [infiniteScrollThrottle]="50"
      (scrolled)="onScroll()">
-  <ngx-masonry [useImagesLoaded]="true" [options]="{gutter: 30, fitWidth: true}">
-    <ngxMasonryItem class="masonry-item" *ngFor="let photo of photos | async">
+
+  <ngx-masonry *ngIf="showGrid" [useImagesLoaded]="true" [options]="{gutter: 30, fitWidth: true}">
+    <ngxMasonryItem class="masonry-item" *ngFor="let photo of photos">
       <app-flickr-photo [photo]="photo"></app-flickr-photo>
     </ngxMasonryItem>
   </ngx-masonry>
 
   <mat-spinner *ngIf="isLoading | async"></mat-spinner>
-  <h2 *ngIf="!(isLoading | async) && (photos | async).length === 0" class="mat-h1 no-matching-photos">No photos matching
+  <h2 *ngIf="!(isLoading | async) && photos.length === 0" class="mat-h1 no-matching-photos">No photos matching
     search criteria.</h2>
 </div>
