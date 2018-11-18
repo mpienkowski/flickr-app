@@ -1,10 +1,12 @@
 <mat-card>
-  <img mat-card-image src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}.jpg">
-  <mat-card-content>
-    <div class="caption">{{photo.datetaken | justDate}}, {{photo.ownername}}</div>
-    <div class="title">{{photo.title}}</div>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button (click)="moreFromArtist(photo.owner)">MORE FROM AUTHOR</button>
-  </mat-card-actions>
+  <mat-card-header>
+    <mat-card-title [matTooltip]="photo.title"
+                    matTooltipPosition="after"
+                    [matTooltipDisabled]="photo.title.length < titleLengthLimit">
+      {{photo.title | truncate:titleLengthLimit}}
+    </mat-card-title>
+    <mat-card-subtitle>{{photo.datetaken | justDate}}, {{photo.ownername}}</mat-card-subtitle>
+  </mat-card-header>
+  <img width="300" height="300" class="flickrPhoto" mat-card-image
+       src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}.jpg">
 </mat-card>

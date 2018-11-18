@@ -22,11 +22,11 @@ import {
   MatDatepickerModule,
   MatFormFieldModule,
   MatInputModule,
-  MatNativeDateModule,
+  MatNativeDateModule, MatProgressBarModule,
   MatProgressSpinnerModule,
   MatSelectModule,
   MatSnackBarModule,
-  MatToolbarModule
+  MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 import { MessageEffects } from './effects/message.effects';
 import { JustDatePipe } from './just-date.pipe';
@@ -40,6 +40,7 @@ import { PhotoMapComponent } from './photo-map/photo-map.component';
 import { AgmCoreModule } from '@agm/core';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 import { MapPhotosEffects } from './effects/map-photos.effects';
+import { TruncatePipe } from './truncate.pipe';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { MapPhotosEffects } from './effects/map-photos.effects';
     FilterComponent,
     PhotoSearchComponent,
     NavigationComponent,
-    PhotoMapComponent
+    PhotoMapComponent,
+    TruncatePipe
   ],
   imports: [
     BrowserModule,
@@ -73,6 +75,8 @@ import { MapPhotosEffects } from './effects/map-photos.effects';
     MatDatepickerModule,
     MatNativeDateModule,
     MatToolbarModule,
+    MatProgressBarModule,
+    MatTooltipModule,
     AgmCoreModule.forRoot({apiKey: appConfig.googleMapsApiKey}),
     AgmSnazzyInfoWindowModule
   ],

@@ -1,3 +1,21 @@
+mat-card {
+  //max-width: 300px;
+  //max-height: 423px;
+
+  max-width: 300px;
+  //si-frame si-content-wrapper
+}
+
 .caption {
   text-align: right;
+}
+
+.flickrPhoto {
+  max-width: 300px;
+  max-height: 300px;
+  width: auto;
+  height: auto;
+  //display: block;
+  //width: 100%;
+  //height: auto;
 }

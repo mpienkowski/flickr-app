@@ -1,0 +1,7 @@
+mat-card-header .mat-card-header-text {
+  margin: 0;
+}
+
+.mat-card:not([class*=mat-elevation-z]) {
+  box-shadow: none;
+}

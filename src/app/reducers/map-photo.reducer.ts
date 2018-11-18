@@ -1,15 +1,15 @@
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { Photo } from '../models/photo.model';
 import { MapPhotoActions, MapPhotoActionTypes } from '../actions/map-photo.actions';
 
 export interface State extends EntityState<Photo> {
-  // additional entities state properties
+  isFetching: boolean;
 }
 
 export const adapter: EntityAdapter<Photo> = createEntityAdapter<Photo>();
 
 export const initialState: State = adapter.getInitialState({
-  // additional entity state properties
+  isFetching: false
 });
 
 export function reducer(
@@ -50,11 +50,19 @@ export function reducer(
     }
 
     case MapPhotoActionTypes.LoadMapPhotos: {
-      return adapter.addAll(action.payload.mapPhotos, state);
+      return {...adapter.addAll(action.payload.mapPhotos, state), isFetching: false};
     }
 
     case MapPhotoActionTypes.ClearMapPhotos: {
       return adapter.removeAll(state);
+    }
+
+    case MapPhotoActionTypes.FetchMapPhotos: {
+      return {...state, isFetching: true};
+    }
+
+    case MapPhotoActionTypes.FetchFailed: {
+      return {...state, isFetching: false};
     }
 
     default: {
@@ -67,5 +75,5 @@ export const {
   selectIds,
   selectEntities,
   selectAll,
-  selectTotal,
+  selectTotal
 } = adapter.getSelectors();

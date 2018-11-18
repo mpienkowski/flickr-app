@@ -27,7 +27,8 @@ export class FlickrApiService {
         license: filter.licenses.join(','),
         min_taken_date: this.getTimestamp(filter.minDate),
         max_taken_date: this.getTimestamp(filter.maxDate),
-        bbox: this.bboxToString(filter.bbox)
+        bbox: this.bboxToString(filter.bbox),
+        per_page: '100'
       }
     };
     return this.http.get<{ photos: { photo: Photo[] } }>(url, options).pipe(

@@ -1,8 +1,14 @@
+<mat-progress-bar mode="{{(isFetching | async) ? 'indeterminate' : 'determinate'}}"></mat-progress-bar>
 <agm-map [latitude]="51.673858" [longitude]="7.815982" (boundsChange)="onBoundsChange($event)">
   <agm-marker *ngFor="let photo of photos | async" [latitude]="photo.latitude" [longitude]="photo.longitude">
-    <agm-snazzy-info-window [maxWidth]="1000" [maxHeight]="1000" [closeWhenOthersOpen]="true">
+    <agm-snazzy-info-window [maxWidth]="500" [maxHeight]="500"
+                            [closeWhenOthersOpen]="true"
+                            [showCloseButton]="false"
+                            backgroundColor="#424242"
+                            padding="17px"
+                            (isOpenChange)="onDetailsOpenChange($event)">
       <ng-template>
-        <agm-info-window><app-flickr-photo [photo]="photo"></app-flickr-photo></agm-info-window>
+          <app-flickr-photo [photo]="photo"></app-flickr-photo>
       </ng-template>
     </agm-snazzy-info-window>
   </agm-marker>

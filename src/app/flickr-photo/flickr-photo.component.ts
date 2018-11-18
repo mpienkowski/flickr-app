@@ -7,7 +7,8 @@ import { Photo } from '../models/photo.model';
   styleUrls: ['./flickr-photo.component.scss']
 })
 export class FlickrPhotoComponent implements OnInit {
-  @Input() photo: Photo;
+  @Input() public photo: Photo;
+  public readonly titleLengthLimit = 21;
 
   constructor() {
   }
