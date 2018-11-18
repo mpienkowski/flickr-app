@@ -28,6 +28,7 @@ export class FlickrApiService {
         min_taken_date: this.getTimestamp(filter.minDate),
         max_taken_date: this.getTimestamp(filter.maxDate),
         bbox: this.bboxToString(filter.bbox),
+        user_id: filter.author.id,
         per_page: '100'
       }
     };

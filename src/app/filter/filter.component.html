@@ -32,4 +32,10 @@
     <mat-datepicker-toggle matSuffix [for]="maxDatePicker"></mat-datepicker-toggle>
     <mat-datepicker #maxDatePicker></mat-datepicker>
   </mat-form-field>
+  <mat-chip-list *ngIf="filter.author.id">
+    <mat-chip selected (removed)="onAuthorRemove()">
+      Author: {{filter.author.name}}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
 </mat-toolbar>

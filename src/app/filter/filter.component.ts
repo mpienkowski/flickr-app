@@ -4,7 +4,7 @@ import { select, Store } from '@ngrx/store';
 import { RootState } from '../reducers';
 import { selectFilter } from '../selectors/filter.selectors';
 import { Observable, Subscription } from 'rxjs';
-import { SetLicenses, SetMaxDate, SetMinDate, SetText } from '../actions/filter.actions';
+import { SetAuthor, SetLicenses, SetMaxDate, SetMinDate, SetText } from '../actions/filter.actions';
 import { selectAllLicenses } from '../selectors/licenses.selectors';
 import { License } from '../models/license.model';
 import { FetchLicenses } from '../actions/license.actions';
@@ -51,5 +51,9 @@ export class FilterComponent implements OnInit, OnDestroy {
 
   public onMaxDateChange({value}: MatDatepickerInputEvent<Date>) {
     this.store.dispatch(new SetMaxDate(value));
+  }
+
+  public onAuthorRemove() {
+    this.store.dispatch(new SetAuthor(null));
   }
 }

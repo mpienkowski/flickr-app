@@ -34,7 +34,8 @@ export class PhotosEffects {
     FilterActionTypes.SetText,
     FilterActionTypes.SetLicenses,
     FilterActionTypes.SetMinDate,
-    FilterActionTypes.SetMaxDate
+    FilterActionTypes.SetMaxDate,
+    FilterActionTypes.SetAuthor
   ];
   @Effect()
   public filterChanges$: Observable<Action> = this.actions$.pipe(

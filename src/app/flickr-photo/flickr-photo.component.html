@@ -1,11 +1,14 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title title="{{photo.title}}">{{photo.title}}</mat-card-title>
-    <mat-card-subtitle>{{photo.ownername}}</mat-card-subtitle>
+    <mat-card-subtitle class="link" (click)="onAuthorClick()">{{photo.ownername}}</mat-card-subtitle>
     <mat-card-subtitle>{{photo.datetaken | justDate}}</mat-card-subtitle>
   </mat-card-header>
   <div class="photoContainer">
-    <img width="300" height="300" class="flickrPhoto"
-         src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}.jpg">
+    <a href="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}.jpg"
+       target="_blank">
+      <img width="300" height="300" class="flickrPhoto"
+           src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}.jpg">
+    </a>
   </div>
 </mat-card>

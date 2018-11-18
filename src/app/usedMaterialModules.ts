@@ -1,8 +1,8 @@
 import {
   MatButtonModule,
-  MatCardModule,
+  MatCardModule, MatChipsModule,
   MatDatepickerModule,
-  MatFormFieldModule,
+  MatFormFieldModule, MatIconModule,
   MatInputModule,
   MatNativeDateModule,
   MatProgressBarModule,
@@ -25,5 +25,7 @@ export const usedMaterialModules = [
   MatNativeDateModule,
   MatToolbarModule,
   MatProgressBarModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatChipsModule,
+  MatIconModule
 ];
