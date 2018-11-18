@@ -2,6 +2,13 @@ mat-card-header .mat-card-header-text {
   margin: 0;
 }
 
+mat-card-header .mat-card-title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 265px;
+}
+
 .mat-card:not([class*=mat-elevation-z]) {
   box-shadow: none;
 }

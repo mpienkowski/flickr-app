@@ -10,7 +10,6 @@ import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { PhotosGridComponent } from './photos-grid/photos-grid.component';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects';
 import { PhotosEffects } from './effects/photos.effects';
@@ -40,11 +39,12 @@ import { PhotoMapComponent } from './photo-map/photo-map.component';
 import { AgmCoreModule } from '@agm/core';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 import { MapPhotosEffects } from './effects/map-photos.effects';
+import { NgxMasonryModule } from 'ngx-masonry';
+import { usedMaterialModules } from './usedMaterialModules';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PhotosGridComponent,
     FlickrPhotoComponent,
     JustDatePipe,
     FilterComponent,
@@ -63,20 +63,10 @@ import { MapPhotosEffects } from './effects/map-photos.effects';
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     EffectsModule.forRoot([AppEffects, PhotosEffects, MessageEffects, LicenseEffects, MapPhotosEffects]),
     InfiniteScrollModule,
-    MatProgressSpinnerModule,
-    MatSnackBarModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatToolbarModule,
-    MatProgressBarModule,
-    MatTooltipModule,
     AgmCoreModule.forRoot({apiKey: appConfig.googleMapsApiKey}),
-    AgmSnazzyInfoWindowModule
+    AgmSnazzyInfoWindowModule,
+    NgxMasonryModule,
+    ...usedMaterialModules
   ],
   providers: [
     {provide: APP_CONFIG, useValue: appConfig}
