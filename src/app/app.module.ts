@@ -40,7 +40,6 @@ import { PhotoMapComponent } from './photo-map/photo-map.component';
 import { AgmCoreModule } from '@agm/core';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 import { MapPhotosEffects } from './effects/map-photos.effects';
-import { TruncatePipe } from './truncate.pipe';
 
 @NgModule({
   declarations: [
@@ -51,8 +50,7 @@ import { TruncatePipe } from './truncate.pipe';
     FilterComponent,
     PhotoSearchComponent,
     NavigationComponent,
-    PhotoMapComponent,
-    TruncatePipe
+    PhotoMapComponent
   ],
   imports: [
     BrowserModule,

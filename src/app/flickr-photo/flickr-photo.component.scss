@@ -2,13 +2,14 @@ mat-card {
   max-width: 300px;
 }
 
-.caption {
-  text-align: right;
+.photoContainer {
+  width: 100%;
+  text-align: center;
 }
 
 .flickrPhoto {
-  max-width: 300px;
-  max-height: 300px;
+  max-width: 268px;
+  max-height: 268px;
   width: auto;
   height: auto;
 }

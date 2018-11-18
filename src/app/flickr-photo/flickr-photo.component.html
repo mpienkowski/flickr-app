@@ -1,13 +1,11 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title [matTooltip]="photo.title"
-                    matTooltipPosition="after"
-                    [matTooltipDisabled]="photo.title.length < titleLengthLimit">
-      {{photo.title | truncate:titleLengthLimit}}
-    </mat-card-title>
+    <mat-card-title>{{photo.title}}</mat-card-title>
     <mat-card-subtitle>{{photo.ownername}}</mat-card-subtitle>
     <mat-card-subtitle>{{photo.datetaken | justDate}}</mat-card-subtitle>
   </mat-card-header>
-    <img width="300" height="300" class="flickrPhoto" mat-card-image
+  <div class="photoContainer">
+    <img width="300" height="300" class="flickrPhoto"
          src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}.jpg">
+  </div>
 </mat-card>
