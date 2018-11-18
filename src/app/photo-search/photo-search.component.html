@@ -10,6 +10,6 @@
   </ngx-masonry>
 
   <mat-spinner *ngIf="isLoading | async"></mat-spinner>
-  <h2 *ngIf="!(isLoading | async) && (photos | async).length === 0" class="mat-h2 no-matching-photos">No photos matching
+  <h2 *ngIf="!(isLoading | async) && (photos | async).length === 0" class="mat-h1 no-matching-photos">No photos matching
     search criteria.</h2>
 </div>

@@ -11,14 +11,24 @@
     </mat-select>
   </mat-form-field>
   <mat-form-field>
-    <input matInput [matDatepicker]="minDatePicker" placeholder="Choose min date"
-           (dateChange)="onMinDateChange($event)">
+    <input
+      matInput
+      [(ngModel)]="filter.minDate"
+      [matDatepicker]="minDatePicker"
+      [max]="filter.maxDate"
+      placeholder="Choose min date"
+      (dateChange)="onMinDateChange($event)">
     <mat-datepicker-toggle matSuffix [for]="minDatePicker"></mat-datepicker-toggle>
     <mat-datepicker #minDatePicker></mat-datepicker>
   </mat-form-field>
   <mat-form-field>
-    <input matInput [matDatepicker]="maxDatePicker" placeholder="Choose max date"
-           (dateChange)="onMaxDateChange($event)">
+    <input
+      matInput
+      [(ngModel)]="filter.maxDate"
+      [matDatepicker]="maxDatePicker"
+      [min]="filter.minDate"
+      placeholder="Choose max date"
+      (dateChange)="onMaxDateChange($event)">
     <mat-datepicker-toggle matSuffix [for]="maxDatePicker"></mat-datepicker-toggle>
     <mat-datepicker #maxDatePicker></mat-datepicker>
   </mat-form-field>

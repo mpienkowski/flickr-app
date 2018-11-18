@@ -6,6 +6,7 @@ import { SetBbox } from '../actions/filter.actions';
 import { selectAllMapPhotos, selectIsFetching } from '../selectors/map-photo.selectors';
 import { Observable } from 'rxjs';
 import { Photo } from '../models/photo.model';
+import { GeolocationService } from '../geolocation.service';
 
 @Component({
   selector: 'app-photo-map',
@@ -13,16 +14,19 @@ import { Photo } from '../models/photo.model';
   styleUrls: ['./photo-map.component.scss']
 })
 export class PhotoMapComponent implements OnInit {
-  private photos: Observable<Photo[]>;
+  public photos: Observable<Photo[]>;
+  public currentPosition: Promise<Position>;
   private isFetching: Observable<boolean>;
   private isDetailsWindowOpen: boolean;
 
-  constructor(private store: Store<RootState>) {
+  constructor(private store: Store<RootState>,
+              private geolocationService: GeolocationService) {
   }
 
   public ngOnInit() {
     this.photos = this.store.pipe(select(selectAllMapPhotos));
     this.isFetching = this.store.pipe(select(selectIsFetching));
+    this.currentPosition = this.geolocationService.getCurrentPosition();
   }
 
   public onBoundsChange(bounds: LatLngBounds) {
