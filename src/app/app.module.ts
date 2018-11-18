@@ -69,7 +69,8 @@ import { usedMaterialModules } from './usedMaterialModules';
     ...usedMaterialModules
   ],
   providers: [
-    {provide: APP_CONFIG, useValue: appConfig}
+    {provide: APP_CONFIG, useValue: appConfig},
+    {provide: Window, useValue: window}
   ],
   bootstrap: [AppComponent]
 })

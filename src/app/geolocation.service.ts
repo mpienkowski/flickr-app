@@ -5,13 +5,13 @@ import { Injectable } from '@angular/core';
 })
 export class GeolocationService {
 
-  constructor() {
+  constructor(private window: Window) {
   }
 
   public getCurrentPosition(): Promise<Position> {
     return new Promise<Position>((resolve, reject) => {
       try {
-        window.navigator.geolocation.getCurrentPosition(resolve, reject);
+        this.window.navigator.geolocation.getCurrentPosition(resolve, reject);
       } catch {
         reject('Geolocation not available');
       }
