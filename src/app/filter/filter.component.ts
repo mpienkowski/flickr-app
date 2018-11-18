@@ -18,8 +18,8 @@ import { emptyAuthor } from '../models/author.model';
 })
 export class FilterComponent implements OnInit, OnDestroy {
   public filter: Filter;
+  public licenses: Observable<License[]>;
   private subscriptions: Subscription = new Subscription();
-  private licenses: Observable<License[]>;
 
   constructor(private store: Store<RootState>) {
   }

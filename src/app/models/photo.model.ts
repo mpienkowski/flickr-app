@@ -5,4 +5,7 @@ export interface Photo {
   owner: string;
   ownername: string;
   datetaken: string;
+  farm: string;
+  server: string;
+  secret: string;
 }

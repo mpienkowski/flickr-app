@@ -16,7 +16,7 @@ import { GeolocationService } from '../geolocation.service';
 export class PhotoMapComponent implements OnInit, OnDestroy {
   public photos: Observable<Photo[]>;
   public currentPosition: Promise<Position>;
-  private isFetching: Observable<boolean>;
+  public isFetching: Observable<boolean>;
   private isDetailsWindowOpen: boolean;
 
   constructor(private store: Store<RootState>,
