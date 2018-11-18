@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Observable, of } from 'rxjs';
-import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { interval, Observable, of } from 'rxjs';
+import { catchError, debounce, filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { Action, select, Store } from '@ngrx/store';
 import { AddPhotos, ClearPhotos, FetchFailed, FetchNextPageOfPhotos, PhotoActionTypes } from '../actions/photo.actions';
 import { FlickrApiService } from '../flickr-api.service';
@@ -14,30 +14,28 @@ import { selectFilter } from '../selectors/filter.selectors';
 
 @Injectable()
 export class PhotosEffects {
-  private readonly filterChangeActions = [
-    FilterActionTypes.SetText,
-    FilterActionTypes.SetLicenses,
-    FilterActionTypes.SetMinDate,
-    FilterActionTypes.SetMaxDate
-  ];
-
   @Effect()
   public fetchNextPage$: Observable<Action> = this.actions$.pipe(
     ofType(PhotoActionTypes.FetchNextPageOfPhotos),
+    debounce(() => interval(250)),
     withLatestFrom(this.store.pipe(select(selectLoadedPages))),
     withLatestFrom(this.store.pipe(select(selectFilter))),
-    switchMap(([[, loadedPages], filter]) =>
-      this.flickrApiService.searchPhotos(loadedPages + 1, filter).pipe(
-        map(photos => new AddPhotos({photos})),
-        catchError(() => of(new FetchFailed()))
-      )
-    )
+    filter(([[, loadedPages], currentFilter]) => !currentFilter.bbox),
+    switchMap(([[, loadedPages], currentFilter]) => this.flickrApiService.searchPhotos(loadedPages + 1, currentFilter)),
+    map(photos => new AddPhotos({photos})),
+    catchError(() => of(new FetchFailed()))
   );
   @Effect()
   public handleErrors$: Observable<Action> = this.actions$.pipe(
     ofType(PhotoActionTypes.FetchFailed),
     map(() => new ErrorMessage(`Couldn't fetch photos, please try again`, new FetchNextPageOfPhotos()))
   );
+  private readonly filterChangeActions = [
+    FilterActionTypes.SetText,
+    FilterActionTypes.SetLicenses,
+    FilterActionTypes.SetMinDate,
+    FilterActionTypes.SetMaxDate
+  ];
   @Effect()
   public filterChanges$: Observable<Action> = this.actions$.pipe(
     ofType(...this.filterChangeActions),

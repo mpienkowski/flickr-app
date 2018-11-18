@@ -37,8 +37,8 @@ export class FilterComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
-  public onTextChange() {
-    this.store.dispatch(new SetText(this.filter.text));
+  public onTextChange(value: string) {
+    this.store.dispatch(new SetText(value));
   }
 
   public onLicensesChange({value}: MatSelectChange) {

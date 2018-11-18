@@ -1,6 +1,6 @@
 <mat-toolbar>
   <mat-form-field>
-    <input matInput [(ngModel)]="filter.text" (change)="onTextChange()">
+    <input matInput [(ngModel)]="filter.text" (ngModelChange)="onTextChange($event)">
   </mat-form-field>
   <mat-form-field>
     <mat-select placeholder="License" [(value)]="filter.licenses" (selectionChange)="onLicensesChange($event)"

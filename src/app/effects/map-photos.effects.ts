@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { selectFilter } from '../selectors/filter.selectors';
 import { Action, select, Store } from '@ngrx/store';
-import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { catchError, debounce, filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { interval, Observable, of } from 'rxjs';
 import { ErrorMessage } from '../actions/message.actions';
 import { FetchFailed, FetchMapPhotos, LoadMapPhotos, MapPhotoActionTypes, UpsertMapPhotos } from '../actions/map-photo.actions';
 import { FlickrApiService } from '../flickr-api.service';
@@ -16,20 +16,19 @@ export class MapPhotosEffects {
   @Effect()
   public loadMapPhotos$: Observable<Action> = this.actions$.pipe(
     ofType(MapPhotoActionTypes.FetchMapPhotos),
+    debounce(() => interval(250)),
     withLatestFrom(this.store.pipe(select(selectFilter))),
-    switchMap(([, filter]) =>
-      this.flickrApiService.searchPhotos(0, filter).pipe(
-        map(photos => new LoadMapPhotos({mapPhotos: photos})),
-        catchError(() => of(new FetchFailed()))
-      )
-    )
+    filter(([, currentFilter]) => !!currentFilter.bbox),
+    switchMap(([, currentFilter]) => this.flickrApiService.searchPhotos(0, currentFilter)),
+    map(photos => new LoadMapPhotos({mapPhotos: photos})),
+    catchError(() => of(new FetchFailed()))
   );
   @Effect()
   public upsertMapPhotos$: Observable<Action> = this.actions$.pipe(
     ofType(FilterActionTypes.SetBbox),
     withLatestFrom(this.store.pipe(select(selectFilter))),
-    switchMap(([, filter]) =>
-      this.flickrApiService.searchPhotos(0, filter).pipe(
+    switchMap(([, currentFilter]) =>
+      this.flickrApiService.searchPhotos(0, currentFilter).pipe(
         map(photos => new UpsertMapPhotos({mapPhotos: photos})),
         catchError(() => of(new FetchFailed()))
       )

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RootState } from '../reducers';
 import { select, Store } from '@ngrx/store';
 import { LatLngBounds } from '@agm/core';
@@ -13,7 +13,7 @@ import { GeolocationService } from '../geolocation.service';
   templateUrl: './photo-map.component.html',
   styleUrls: ['./photo-map.component.scss']
 })
-export class PhotoMapComponent implements OnInit {
+export class PhotoMapComponent implements OnInit, OnDestroy {
   public photos: Observable<Photo[]>;
   public currentPosition: Promise<Position>;
   private isFetching: Observable<boolean>;
@@ -37,5 +37,9 @@ export class PhotoMapComponent implements OnInit {
 
   public onDetailsOpenChange(isOpen: boolean) {
     this.isDetailsWindowOpen = isOpen;
+  }
+
+  public ngOnDestroy(): void {
+    this.store.dispatch(new SetBbox(null));
   }
 }
