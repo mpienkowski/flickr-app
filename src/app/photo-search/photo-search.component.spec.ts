@@ -7,16 +7,10 @@ import * as fromRoot from '../reducers';
 import { RootState } from '../reducers';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { Component, Input } from '@angular/core';
-import { Photo } from '../models/photo.model';
 import { AddPhotos, ClearPhotos, FetchNextPageOfPhotos } from '../actions/photo.actions';
-import { samplePhoto } from '../../test-helpers/samplePhoto';
+import { samplePhoto } from '../../test-helpers/sample-photo';
 import { By } from '@angular/platform-browser';
-
-@Component({selector: 'app-flickr-photo', template: ''})
-class FlickrPhotoStubComponent {
-  @Input() photo: Photo;
-}
+import { FlickrPhotoMockComponent } from '../../test-helpers/flickr-photo-mock.component';
 
 describe('PhotoSearchComponent', () => {
   let component: PhotoSearchComponent;
@@ -25,7 +19,7 @@ describe('PhotoSearchComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PhotoSearchComponent, FlickrPhotoStubComponent],
+      declarations: [PhotoSearchComponent, FlickrPhotoMockComponent],
       imports: [
         ...usedMaterialModules,
         StoreModule.forRoot({...fromRoot.reducers}),

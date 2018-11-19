@@ -1,14 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FlickrPhotoComponent } from './flickr-photo.component';
-import { Photo } from '../models/photo.model';
 import { usedMaterialModules } from '../usedMaterialModules';
 import { JustDatePipe } from '../just-date.pipe';
 import { Store, StoreModule } from '@ngrx/store';
 import * as fromRoot from '../reducers';
 import { By } from '@angular/platform-browser';
 import { SetAuthor } from '../actions/filter.actions';
-import { samplePhoto } from '../../test-helpers/samplePhoto';
+import { samplePhoto } from '../../test-helpers/sample-photo';
 
 
 describe('FlickrPhotoComponent', () => {
