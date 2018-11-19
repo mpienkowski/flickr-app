@@ -15,18 +15,6 @@ import { AppEffects } from './app.effects';
 import { PhotosEffects } from './effects/photos.effects';
 import { FlickrPhotoComponent } from './flickr-photo/flickr-photo.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import {
-  MatButtonModule,
-  MatCardModule,
-  MatDatepickerModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatNativeDateModule, MatProgressBarModule,
-  MatProgressSpinnerModule,
-  MatSelectModule,
-  MatSnackBarModule,
-  MatToolbarModule, MatTooltipModule
-} from '@angular/material';
 import { MessageEffects } from './effects/message.effects';
 import { JustDatePipe } from './just-date.pipe';
 import { FilterComponent } from './filter/filter.component';
