@@ -11,7 +11,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { EffectsModule } from '@ngrx/effects';
-import { AppEffects } from './app.effects';
 import { PhotosEffects } from './effects/photos.effects';
 import { FlickrPhotoComponent } from './flickr-photo/flickr-photo.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -49,7 +48,7 @@ import { usedMaterialModules } from './usedMaterialModules';
     HttpClientModule,
     FormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
-    EffectsModule.forRoot([AppEffects, PhotosEffects, MessageEffects, LicenseEffects, MapPhotosEffects]),
+    EffectsModule.forRoot([PhotosEffects, MessageEffects, LicenseEffects, MapPhotosEffects]),
     InfiniteScrollModule,
     AgmCoreModule.forRoot({apiKey: appConfig.googleMapsApiKey}),
     AgmSnazzyInfoWindowModule,

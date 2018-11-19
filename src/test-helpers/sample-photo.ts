@@ -10,3 +10,5 @@ export const samplePhoto = (id?: string): Photo => ({
   secret: 'secret',
   server: 'server'
 });
+
+export const sampleListOfPhotos = (): Photo[] => ([samplePhoto('1'), samplePhoto('2'), samplePhoto('3')]);
