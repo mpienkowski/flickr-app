@@ -11,7 +11,7 @@ import { ErrorMessage } from '../actions/message.actions';
 @Injectable()
 export class LicenseEffects {
   @Effect()
-  public fetchNextPage$: Observable<Action> = this.actions$.pipe(
+  public fetchLicenses$: Observable<Action> = this.actions$.pipe(
     ofType(LicenseActionTypes.FetchLicenses),
     mergeMap(() => this.flickrApiService.fetchLicenses()),
     map(licenses => new AddLicenses({licenses})),
