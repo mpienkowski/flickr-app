@@ -12,7 +12,7 @@ export interface State {
 }
 
 export const initialState: State = {
-  text: 'dogs',
+  text: 'dog',
   licenses: [],
   minDate: null,
   maxDate: null,

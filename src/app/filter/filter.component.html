@@ -1,6 +1,6 @@
 <mat-toolbar>
   <mat-form-field>
-    <input matInput [(ngModel)]="filter.text" (ngModelChange)="onTextChange($event)">
+    <input id="searchTextInput" matInput [(ngModel)]="filter.text" (ngModelChange)="onTextChange($event)">
   </mat-form-field>
   <mat-form-field>
     <mat-select placeholder="License" [(value)]="filter.licenses" (selectionChange)="onLicensesChange($event)"
@@ -12,6 +12,7 @@
   </mat-form-field>
   <mat-form-field>
     <input
+      id="minDateInput"
       matInput
       [(ngModel)]="filter.minDate"
       [matDatepicker]="minDatePicker"
@@ -23,6 +24,7 @@
   </mat-form-field>
   <mat-form-field>
     <input
+      id="maxDateInput"
       matInput
       [(ngModel)]="filter.maxDate"
       [matDatepicker]="maxDatePicker"

@@ -34,10 +34,6 @@ export class FilterComponent implements OnInit, OnDestroy {
     this.licenses = this.store.pipe(select(selectAllLicenses));
   }
 
-  public ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
-  }
-
   public onTextChange(value: string) {
     this.store.dispatch(new SetText(value));
   }
@@ -56,5 +52,9 @@ export class FilterComponent implements OnInit, OnDestroy {
 
   public onAuthorRemove() {
     this.store.dispatch(new SetAuthor(emptyAuthor()));
+  }
+
+  public ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }
