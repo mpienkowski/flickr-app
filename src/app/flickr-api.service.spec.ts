@@ -7,23 +7,13 @@ import { APP_CONFIG } from './config/app.config';
 import { License } from './models/license.model';
 import { Photo } from './models/photo.model';
 import { State as Filter } from './reducers/filter.reducer';
+import { sampleBbox } from '../test-helpers/sample-bbox';
 
 
 describe('FlickrApiService', () => {
   let service: FlickrApiService;
   let httpClient, httpTestingController;
   const apiKey = 'apiKey';
-
-  const getFakeBbox = () => ({
-    getSouthWest: () => ({
-      lng: () => 1,
-      lat: () => 2
-    }),
-    getNorthEast: () => ({
-      lng: (() => 3),
-      lat: (() => 4)
-    })
-  });
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -61,7 +51,7 @@ describe('FlickrApiService', () => {
     ];
     const getFilter = (): Filter => ({
       text: 'text',
-      bbox: <any>getFakeBbox(),
+      bbox: <any>sampleBbox(),
       minDate: new Date('Nov 17 2018'),
       maxDate: new Date('Nov 18 2018'),
       author: {id: '1', name: 'author'},

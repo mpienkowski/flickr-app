@@ -30,7 +30,7 @@ describe('PhotosEffects', () => {
   });
 
   describe('fetchNextPage$', () => {
-    it('should dispatch ErrorMessage', () => {
+    it('should dispatch AddPhotos', () => {
       const action = new FetchNextPageOfPhotos();
       const completion = new AddPhotos({photos: sampleListOfPhotos()});
 
@@ -40,7 +40,7 @@ describe('PhotosEffects', () => {
       expect(effects.fetchNextPage$).toBeObservable(expected);
     });
 
-    it('should dispatch ErrorMessage', () => {
+    it('should dispatch FetchFailed', () => {
       const action = new FetchNextPageOfPhotos();
       const completion = new FetchFailed();
 
