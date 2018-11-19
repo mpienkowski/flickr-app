@@ -8,21 +8,12 @@ import { Store, StoreModule } from '@ngrx/store';
 import * as fromRoot from '../reducers';
 import { By } from '@angular/platform-browser';
 import { SetAuthor } from '../actions/filter.actions';
+import { samplePhoto } from '../../test-helpers/samplePhoto';
 
 
-fdescribe('FlickrPhotoComponent', () => {
+describe('FlickrPhotoComponent', () => {
   let component: FlickrPhotoComponent;
   let fixture: ComponentFixture<FlickrPhotoComponent>;
-  const getPhoto = (): Photo => ({
-    id: 'id',
-    title: 'title',
-    owner: 'owner',
-    ownername: 'owner name',
-    datetaken: '2018-11-01 12:50:43',
-    farm: '123',
-    secret: 'secret',
-    server: 'server'
-  });
   const photoUrl = 'https://farm123.staticflickr.com/server/id_secret.jpg';
 
   beforeEach(() => {
@@ -35,7 +26,7 @@ fdescribe('FlickrPhotoComponent', () => {
   });
 
   it('should display a photo', () => {
-    component.photo = getPhoto();
+    component.photo = samplePhoto();
     fixture.detectChanges();
 
     const a: HTMLLinkElement = fixture.nativeElement.querySelector('a');
@@ -48,25 +39,25 @@ fdescribe('FlickrPhotoComponent', () => {
   });
 
   it('should display photo details', () => {
-    component.photo = getPhoto();
+    component.photo = samplePhoto();
     fixture.detectChanges();
 
     const title: HTMLElement = fixture.nativeElement.querySelector('mat-card-title');
     const authorLabel: HTMLElement = fixture.nativeElement.querySelector('mat-card-subtitle.link');
     const dateLabel: HTMLElement = fixture.nativeElement.querySelector('mat-card-subtitle:not(.link)');
 
-    expect(title.textContent).toEqual(getPhoto().title);
-    expect(authorLabel.textContent).toEqual(getPhoto().ownername);
+    expect(title.textContent).toEqual(samplePhoto().title);
+    expect(authorLabel.textContent).toEqual(samplePhoto().ownername);
     expect(dateLabel.textContent).toEqual('Thu Nov 01 2018');
   });
 
   it('should dispatch SetAuthor when author label is clicked', () => {
-    component.photo = getPhoto();
+    component.photo = samplePhoto();
     fixture.detectChanges();
     const authorLabelDebug = fixture.debugElement.query(By.css('mat-card-subtitle.link'));
     const expectedAction = new SetAuthor({
-      id: getPhoto().owner,
-      name: getPhoto().ownername
+      id: samplePhoto().owner,
+      name: samplePhoto().ownername
     });
 
     const store = TestBed.get(Store);
