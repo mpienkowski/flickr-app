@@ -10,10 +10,9 @@ import { flickrApiMockService } from '../../test-helpers/flickr-api-mock.service
 import { cold, hot } from 'jasmine-marbles';
 import { AddLicenses, FetchFailed, FetchLicenses } from '../actions/license.actions';
 import { sampleListOfLicenses } from '../../test-helpers/sample-license';
-import { FetchMapPhotos } from '../actions/map-photo.actions';
 import { ErrorMessage } from '../actions/message.actions';
 
-fdescribe('LicenseEffects', () => {
+describe('LicenseEffects', () => {
   let actions$: Observable<any>;
   let effects: LicenseEffects;
 

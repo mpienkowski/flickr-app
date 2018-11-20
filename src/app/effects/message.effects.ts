@@ -12,7 +12,7 @@ import { RootState } from '../reducers';
 export class MessageEffects {
 
   @Effect({dispatch: false})
-  public handleErrors$: Observable<Action> = this.actions$.pipe(
+  public handleErrorMessages$: Observable<Action> = this.actions$.pipe(
     ofType(MessageActionTypes.ErrorMessage),
     tap((action: ErrorMessage) => {
       const snackBar = this.snackBar.open(action.message, action.actionToRetry ? 'Retry' : null, {duration: 10000});
