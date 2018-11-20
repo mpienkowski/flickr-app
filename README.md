@@ -1,6 +1,8 @@
 # FlickrApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.5.
+A Flickr gallery PWA based on Angular 7, ngrx, jasmine (over 80% coverage).
+
+Demo: http://flickr-app-1542455056796.firebaseapp.com
 
 ## Development server
 

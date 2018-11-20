@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { WindowWrapper } from './WindowWrapper';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GeolocationService {
 
-  constructor(private window: Window) {
+  constructor(private window: WindowWrapper) {
   }
 
   public getCurrentPosition(): Promise<Position> {

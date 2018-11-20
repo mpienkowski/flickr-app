@@ -28,6 +28,7 @@ import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 import { MapPhotosEffects } from './effects/map-photos.effects';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { usedMaterialModules } from './usedMaterialModules';
+import { WindowWrapper } from './WindowWrapper';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,7 @@ import { usedMaterialModules } from './usedMaterialModules';
   ],
   providers: [
     {provide: APP_CONFIG, useValue: appConfig},
-    {provide: Window, useValue: window}
+    {provide: WindowWrapper, useValue: window}
   ],
   bootstrap: [AppComponent]
 })

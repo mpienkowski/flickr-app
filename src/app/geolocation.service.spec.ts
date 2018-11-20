@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { GeolocationService } from './geolocation.service';
+import { WindowWrapper } from './WindowWrapper';
 
 describe('GeolocationService', () => {
   let service: GeolocationService;
@@ -11,7 +12,7 @@ describe('GeolocationService', () => {
     TestBed.configureTestingModule({
       providers: [
         {
-          provide: Window, useValue: {
+          provide: WindowWrapper, useValue: {
             navigator: {
               geolocation: {
                 getCurrentPosition: getCurrentPositionFake
